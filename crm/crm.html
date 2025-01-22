@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="./styles/crm-styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-header">
+                <h2 class="brand">
+                    <i class="fas fa-users-cog"></i>
+                    CustomerHub
+                </h2>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="btn primary" id="addUserBtn">
+                    <i class="fas fa-plus"></i> Add Contact
+                </button>
+                <div class="nav-menu">
+                    <div class="nav-item active">
+                        <i class="fas fa-home"></i>
+                        Dashboard
+                    </div>
+                    <a href="contacts.html" class="nav-item">
+                        <i class="fas fa-address-book"></i>
+                        Contacts
+                    </a>
+                </div>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="btn logout" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="content-header">
+                <div class="header-actions">
+                    <div class="filter-container">
+                        <select class="filter-select" id="filterSelect">
+                            <option value="all">All Contacts</option>
+                            <option value="birthday">Upcoming Birthdays</option>
+                            <option value="uncontacted">Uncontacted (30d)</option>
+                        </select>
+                    </div>
+                </div>
+            </header>
+
+            <section class="metrics-container">
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <div class="metric-info">
+                        <h3>Total Contacts</h3>
+                        <span id="totalContacts">0</span>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon birthday">
+                        <i class="fas fa-birthday-cake"></i>
+                    </div>
+                    <div class="metric-info">
+                        <h3>This Month Birthdays</h3>
+                        <span id="birthdayContacts">0</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="contact-grid" id="contactGrid"></section>
+        </main>
+    </div>
+
+    <!-- Add Contact Modal -->
+    <div class="modal-overlay" id="userModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Contact</h3>
+                <button class="close-modal" id="closeModalBtn">&times;</button>
+            </div>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Birth Date</label>
+                    <input type="date" id="birthDate" class="clean-font">
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" id="phone">
+                </div>
+                <div class="form-group">
+                    <label>Tags</label>
+                    <div class="tags-editor">
+                        <div class="tags-container"></div>
+                        <div class="tags-input-container">
+                            <input type="text" id="tagsInput" placeholder="Add tags (comma separated)">
+                        </div>
+                        <div class="tags-instruction">Type tags separated by commas</div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="reset" class="btn secondary small">Clear</button>
+                    <button type="submit" class="btn primary">Save Contact</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal-overlay" id="deleteConfirmationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Confirm Deletion</h3>
+                <button class="close-modal" id="closeDeleteModalBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this contact?</p>
+            </div>
+            <div class="form-actions">
+                <button class="btn secondary" id="cancelDeleteBtn">Cancel</button>
+                <button class="btn danger" id="confirmDeleteBtn">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="./main.js"></script>
+</body>
+</html>
