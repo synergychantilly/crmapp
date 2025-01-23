@@ -180,16 +180,30 @@ body {
     margin-top: 1rem;
 }
 
+.action-buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    width: fit-content;
+}
+
 .action-btn {
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 20px;
-    font-size: 0.75rem;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none !important;
+    box-shadow: none !important;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-    transition: opacity 0.2s ease;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.action-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(42, 91, 215, 0.2);
 }
 
 .action-btn:hover {
@@ -565,6 +579,466 @@ input[type="date"] {
     padding: 0.25rem 0.5rem;
     font-size: 0.75rem;
 }
+
+.search-container {
+    flex: 1;
+    max-width: 300px;
+    margin-right: 1rem;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+}
+
+#searchInput:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(42,91,215,0.1);
+}
+
+/* Analytics Container */
+.analytics-container {
+    margin-top: 2rem;
+}
+
+/* Chart Controls */
+.chart-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* Chart Container */
+.chart-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Individual Chart Canvas */
+.chart-container canvas {
+    background: white;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: opacity 0.3s ease;
+}
+
+/* Chart Grid Layout */
+.chart-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+}
+
+.chart-card {
+    background: white;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    position: relative;
+    min-height: 300px; /* Base size */
+    transition: all 0.3s ease;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.chart-wrapper {
+    height: 300px;
+    position: relative;
+}
+
+.toggle-chart {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--secondary-color);
+    padding: 0.5rem;
+}
+
+.chart-minimized {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: white;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.chart-minimized i {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+/* When chart is hidden */
+.chart-card.minimized .chart-wrapper,
+.chart-card.minimized .chart-header {
+    display: none;
+}
+
+.chart-card.minimized .chart-minimized {
+    display: flex;
+}
+
+/* Chart minimized state */
+.chart-card.minimized {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 60px !important; /* Collapsed height */
+    overflow: hidden;
+}
+
+.chart-card.minimized .chart-header h4 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100% - 40px);
+}
+
+.chart-card.minimized:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.chart-minimized {
+    display: none;
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.chart-minimized i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.chart-minimized span {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    display: block;
+}
+
+.chart-card.minimized .chart-minimized {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.chart-header .toggle-chart {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 2;
+    background: rgba(255,255,255,0.9);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Toggle button styling */
+.toggle-chart {
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.toggle-chart:hover {
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.toggle-chart::after {
+    content: attr(title);
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.toggle-chart:hover::after {
+    opacity: 1;
+}
+
+/* Quick Actions Panel */
+.quick-actions-panel {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+  }
+  
+  .quick-action-toggle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(42, 91, 215, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .quick-action-toggle:hover {
+    transform: scale(1.1) rotate(90deg);
+  }
+  
+  .quick-action-items {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .quick-actions-panel.expanded .quick-action-items {
+    display: flex;
+  }
+  
+  .quick-action-btn {
+    padding: 0.75rem;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 160px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .quick-action-btn:hover {
+    background: var(--background-light);
+    transform: translateX(-5px);
+  }
+  
+  .quick-action-btn i {
+    font-size: 1.1rem;
+  }
+  
+  .quick-action-btn[data-action="email"] i { color: #d93025; }
+  .quick-action-btn[data-action="call"] i { color: #34a853; }
+  .quick-action-btn[data-action="task"] i { color: #fbbc05; }
+  .quick-action-btn[data-action="note"] i { color: #6b46c1; }
+
+  /* Notes System */
+    .note-bubble {
+        background: rgba(42, 91, 215, 0.08);
+        border-radius: 8px;
+        padding: 0.75rem;
+        margin: 0.25rem 0;
+        position: relative;
+    }
+  
+  .note-bubble::before {
+    content:none;
+  }
+
+  .note-footer {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    text-align: right;
+  }
+  
+  .note-author {
+    font-size: 0.75rem;
+    color: var(--secondary-color);
+    opacity: 0.8;
+  }
+  
+  .note-header small {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
+  }
+  
+  .note-bubble small {
+    color: var(--secondary-color);
+    font-size: 0.75rem;
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  #noteContactSelect, #noteDate {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.875rem;
+  }
+  
+  #noteContent {
+    width: 100% !important;
+    padding: 0.8rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-family: inherit;
+    line-height: 1.5;
+  }
+
+  .note-btn {
+    background: rgba(107, 70, 193, 0.1);
+    color: #6b46c1;
+  }
+
+    .notes-container {
+        display: grid;
+        gap: 1rem;
+        padding: 1rem;
+        max-height: 60vh;
+        overflow-y: auto;    
+    }
+
+    .note-bubble {
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 1rem;
+        position: relative;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .note-bubble p {
+        margin: 0.5rem 0 0;
+        color: var(--secondary-color);
+    }
+
+    .view-notes-btn {
+        background: rgba(106, 90, 205, 0.1);
+        color: #6a5acd;
+    }
+
+    .note-indicator {
+        position: absolute;
+        top: 3px;
+        right: 3px;
+        width: 8px;
+        height: 8px;
+        background-color: var(--danger-color);
+        border-radius: 50%;
+        border: 2px solid white;
+        animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(0.95); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(0.95); }
+    }
+
+    #viewNotesModal .modal-content {
+        max-width: 500px;
+    }
+
+    .view-notes-btn {
+        background: rgba(106, 90, 205, 0.1);
+        color: #6a5acd;
+    }
+
+    /* Note delete button styling */
+    .note-delete-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: all 0.2s ease;
+    color: var(--danger-color);
+  }
+  
+  .note-delete-btn:hover {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  
+  .note-bubble {
+    position: relative;
+    padding-right: 32px !important;
+  }
+
+  /* Delete controls styling */
+.delete-controls {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    gap: 4px;
+  }
+  
+  .confirm-delete {
+    display: flex;
+    gap: 4px;
+    animation: fadeIn 0.2s ease;
+  }
+  
+  .confirm-delete.hidden {
+    display: none;
+  }
+  
+  .note-delete-btn {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: all 0.2s ease;
+    color: var(--danger-color);
+  }
+  
+  .btn.xsmall {
+    padding: 2px 8px;
+    font-size: 0.65rem;
+    border-radius: 4px;
+  }
+  
+  .note-delete-btn:hover {
+    opacity: 1;
+    transform: scale(1.1);
+  }
 
 /* Responsive Design */
 @media (max-width: 768px) {

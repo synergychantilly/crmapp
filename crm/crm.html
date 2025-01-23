@@ -6,14 +6,15 @@
     <title>CRM Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="./styles/crm-styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="dashboard-container">
         <aside class="dashboard-sidebar">
             <div class="sidebar-header">
                 <h2 class="brand">
-                    <i class="fas fa-users-cog"></i>
-                    CustomerHub
+                    <i class="fa-solid fa-square-poll-vertical"></i>
+                    SYNERGY CRM
                 </h2>
             </div>
             <nav class="sidebar-nav">
@@ -71,9 +72,104 @@
                     </div>
                 </div>
             </section>
-
-            <section class="contact-grid" id="contactGrid"></section>
+             <!-- Analytics Section -->
+             <section class="analytics-container">
+                <div class="chart-grid">
+                    <!-- Total Contacts Chart -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h4>Total Contacts</h4>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="totalContactsChart"></canvas>
+                        </div>
+                        <div class="chart-minimized">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Total Contacts</span>
+                        </div>
+                        <button class="toggle-chart" data-chart="chartId">
+                            <i class="fas fa-eye-slash"></i>
+                        </button>
+                    </div>
+            
+                    <!-- Contacts by Tag Chart -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h4>Contacts by Tag</h4>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="contactsByTagChart"></canvas>
+                        </div>
+                        <div class="chart-minimized">
+                            <i class="fas fa-tags"></i>
+                            <span>Contacts by Tag</span>
+                        </div>
+                        <button class="toggle-chart" data-chart="chartId">
+                            <i class="fas fa-eye-slash"></i>
+                        </button>
+                    </div>
+            
+                    <!-- Upcoming Birthdays Chart -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h4>Upcoming Birthdays</h4>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="birthdaysChart"></canvas>
+                        </div>
+                        <div class="chart-minimized">
+                            <i class="fas fa-birthday-cake"></i>
+                            <span>Upcoming Birthdays</span>
+                        </div>
+                        <button class="toggle-chart" data-chart="chartId">
+                            <i class="fas fa-eye-slash"></i>
+                        </button>
+                    </div>
+            
+                    <!-- Contacts Over Time Chart -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h4>Contacts Over Time</h4>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="contactsOverTimeChart"></canvas>
+                        </div>
+                        <div class="chart-minimized">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Contacts Over Time</span>
+                        </div>
+                        <button class="toggle-chart" data-chart="chartId">
+                            <i class="fas fa-eye-slash"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
         </main>
+
+        <!-- Quick Actions Panel -->
+        <div class="quick-actions-panel">
+            <button class="quick-action-toggle">
+              <i class="fas fa-bolt"></i>
+            </button>
+            <div class="quick-action-items">
+              <button class="quick-action-btn" data-action="email">
+                <i class="fas fa-envelope"></i>
+                <span>Email</span>
+              </button>
+              <button class="quick-action-btn" data-action="call">
+                <i class="fas fa-phone"></i>
+                <span>Call</span>
+              </button>
+              <button class="quick-action-btn" data-action="task">
+                <i class="fas fa-tasks"></i>
+                <span>Task</span>
+              </button>
+              <button class="quick-action-btn" data-action="note">
+                <i class="fas fa-sticky-note"></i>
+                <span>Note</span>
+              </button>
+            </div>
+          </div>
     </div>
 
     <!-- Add Contact Modal -->
@@ -114,6 +210,34 @@
                     <button type="reset" class="btn secondary small">Clear</button>
                     <button type="submit" class="btn primary">Save Contact</button>
                 </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Note Modal -->
+    <div class="modal-overlay" id="noteModal">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h3>Add Note to Contact</h3>
+            <button class="close-modal" id="closeNoteModal">&times;</button>
+            </div>
+            <form id="noteForm">
+            <div class="form-group">
+                <label>Contact</label>
+                <select id="noteContactSelect" class="clean-font" required></select>
+            </div>
+            <div class="form-group">
+                <label>Note Date</label>
+                <input type="date" id="noteDate" class="clean-font" required>
+            </div>
+            <div class="form-group">
+                <label>Note Content</label>
+                <textarea id="noteContent" rows="4" required></textarea>
+            </div>
+            <div class="form-actions">
+                <button type="reset" class="btn secondary">Clear</button>
+                <button type="submit" class="btn primary">Save Note</button>
+            </div>
             </form>
         </div>
     </div>

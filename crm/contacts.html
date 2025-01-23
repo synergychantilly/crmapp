@@ -48,6 +48,9 @@
                             <option value="uncontacted">Uncontacted (30d)</option>
                         </select>
                     </div>
+                    <div class="search-container">
+                        <input type="text" id="searchInput" placeholder="Search contacts...">
+                    </div>
                 </div>
             </header>
 
@@ -56,16 +59,41 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Date Created</th>
+                            <th>Phone Number</th>
                             <th>Email</th>
-                            <th>Birthday</th>
-                            <th></th>
+                            <th>Tag(s)</th>
+                            <th>Date Created</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody id="contactTableBody"></tbody>
                 </table>
             </section>
+
+            <!-- Quick Actions Panel -->
+            <div class="quick-actions-panel">
+            <button class="quick-action-toggle">
+              <i class="fas fa-bolt"></i>
+            </button>
+            <div class="quick-action-items">
+              <button class="quick-action-btn" data-action="email">
+                <i class="fas fa-envelope"></i>
+                <span>Email</span>
+              </button>
+              <button class="quick-action-btn" data-action="call">
+                <i class="fas fa-phone"></i>
+                <span>Call</span>
+              </button>
+              <button class="quick-action-btn" data-action="task">
+                <i class="fas fa-tasks"></i>
+                <span>Task</span>
+              </button>
+              <button class="quick-action-btn" data-action="note">
+                <i class="fas fa-sticky-note"></i>
+                <span>Note</span>
+              </button>
+            </div>
+          </div>
         </main>
     </div>
 
@@ -108,6 +136,55 @@
                     <button type="submit" class="btn primary">Save Contact</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Note Modal -->
+    <div class="modal-overlay" id="noteModal">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h3>Add Note</h3>
+            <button class="close-modal" id="closeNoteModal">&times;</button>
+        </div>
+        <form id="noteForm">
+            <div class="form-group">
+                <label>Contact</label>
+                    <select id="noteContactSelect" class="clean-font" required></select>
+            </div>
+            <div class="form-group">
+                <label>Note Date</label>
+                <input type="date" id="noteDate" class="clean-font" required>
+                </div>
+            <div class="form-group">
+                <label>Note Content</label>
+                <textarea 
+                    id="noteContent" 
+                    rows="4" 
+                    required
+                    style="resize: none; width: 100%;" 
+                ></textarea>
+            </div>
+                <div class="form-actions">
+                    <button type="reset" class="btn secondary">Clear</button>
+                    <button type="submit" class="btn primary">Save Note</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- View Notes Modal -->
+    <div class="modal-overlay" id="viewNotesModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Contact Notes</h3>
+                <button class="close-modal" id="closeViewNotesModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="notesContainer" class="notes-container"></div>
+            </div>
+            <div class="form-actions">
+                <button class="btn secondary" id="closeViewNotesBtn">Close</button>
+            </div>
         </div>
     </div>
 
