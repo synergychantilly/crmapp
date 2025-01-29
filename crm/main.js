@@ -385,10 +385,14 @@ export class CRMApp {
         birthday: document.getElementById('birthDate').value,
         tags: this.tagManager.getTags(),
         lastContacted: new Date().toISOString().split('T')[0],
-        dateCreated: new Date().toISOString().split('T')[0],
         notes: []
       };
-
+  
+      // Only set dateCreated for new contacts
+      if (!this.currentContactKey) {
+        contactData.dateCreated = new Date().toISOString().split('T')[0];
+      }
+  
       try {
         if (this.currentContactKey) {
           await update(ref(this.db, `users/${this.userId}/contacts/${this.currentContactKey}`), contactData);
