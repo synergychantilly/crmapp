@@ -180,34 +180,34 @@ body {
     margin-top: 1rem;
 }
 
+/* Compact action buttons grid */
 .action-buttons-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
-    width: fit-content;
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 0.3rem !important;
 }
 
 .action-btn {
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    border: none !important;
-    box-shadow: none !important;
+    width: 30px !important;
+    height: 30px !important;
+    padding: 0 !important;
+    border-radius: 50%; /* Makes it circular */
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
-    transition: all 0.2s ease;
-    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Add transition for animation */
+    outline: none;
+    border: none;
 }
 
 .action-btn:focus {
     outline: none;
     box-shadow: 0 0 0 2px rgba(42, 91, 215, 0.2);
-}
+  }
 
 .action-btn:hover {
-    opacity: 0.85;
+    transform: scale(1.1); /* Scale up on hover */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
 }
 
 .email-btn {
@@ -512,9 +512,12 @@ input[type="date"] {
 }
 
 .tags-preview {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
+    gap: 0.3rem !important;
+}
+
+.tag {
+    padding: 0.1rem 0.5rem !important;
+    font-size: 0.7rem !important;
 }
 
 #searchInput {
@@ -558,24 +561,71 @@ input[type="date"] {
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
-.contact-table th,
+.contact-table th, 
 .contact-table td {
-    padding: 0.75rem;
-    text-align: left;
-    border-bottom: 1px solid #e2e8f0;
+  padding: 0.4rem 0.5rem !important;
+  font-size: 0.8rem !important;
+}
+
+.contact-table td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .contact-table th {
     background: var(--background-light);
     font-weight: 600;
     color: var(--secondary-color);
+    padding: 0.4rem 0.5rem !important;
+    font-size: 0.8rem !important;
+    vertical-align: middle !important;
+    white-space: nowrap; /* Prevent header text from wrapping */
+    text-align: left;
 }
 
 .contact-table tr:hover {
     background: var(--background-light);
 }
 
+.contact-table tr {
+    line-height: 1.2;
+}
+
+/* Set consistent column widths */
+.contact-table th:nth-child(1), 
+.contact-table td:nth-child(1) { /* Name column */
+  width: 20%;
+}
+
+.contact-table th:nth-child(2), 
+.contact-table td:nth-child(2) { /* Phone Number column */
+  width: 15%;
+}
+
+.contact-table th:nth-child(3), 
+.contact-table td:nth-child(3) { /* Email column */
+  width: 25%;
+}
+
+.contact-table th:nth-child(4), 
+.contact-table td:nth-child(4) { /* Tags column */
+  width: 20%;
+}
+
+.contact-table th:nth-child(5), 
+.contact-table td:nth-child(5) { /* Date Created column */
+  width: 10%;
+}
+
+.contact-table th:nth-child(6), 
+.contact-table td:nth-child(6) { /* Actions column */
+  width: 10%;
+  min-width: 120px; /* Ensure actions column has enough space */
+}
+
 .contact-table .action-btn {
+    outline: none !important;
     padding: 0.25rem 0.5rem;
     font-size: 0.75rem;
 }
@@ -853,7 +903,7 @@ input[type="date"] {
   }
   
   .quick-action-btn i {
-    font-size: 1.1rem;
+    font-size: 0.9rem !important;
   }
   
   .quick-action-btn[data-action="email"] i { color: #d93025; }
